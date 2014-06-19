@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">MyCurrency</string>
+    <string name="bank_buy_rate">银行买入: %1$s</string>
+    <string name="bank_sell_rate">银行卖出: %1$s</string>
+    <string name="currency_type">币种: %1$s</string>
+    <string name="update_time">更新时间：%1$s</string>
+
+</resources>
