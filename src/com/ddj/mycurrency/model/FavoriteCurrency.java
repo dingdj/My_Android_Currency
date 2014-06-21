@@ -12,8 +12,15 @@ package com.ddj.mycurrency.model;
  */
 public class FavoriteCurrency {
 	
+	public static final int UNKNOWID = -1;
+	
+	public static final int BUY_TYPE = 1;
+	
+	public static final int FAVORITE_TYPE = 0;
+	
+	
 	//数据库中的唯一ID
-	private int id;
+	private int id = UNKNOWID;
 	
 	//币种
 	private String currencyType;
@@ -23,6 +30,10 @@ public class FavoriteCurrency {
 	
 	//买入的时间
 	private String buyTime;
+	
+	//type = 0 未买提醒
+	//type = 1 已买提醒
+	private int type;
 	
 	
 	
@@ -82,6 +93,16 @@ public class FavoriteCurrency {
 	public void setBuyTime(String buyTime) {
 		this.buyTime = buyTime;
 	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	
 	
 
 	

@@ -29,9 +29,14 @@ public class CurrencyDatabaseHelper extends SQLiteOpenHelper {
 	
 	public final static String BUY_DATE_COLUMN_NAME = "BUY_DATE";
 	
+	public final static String TYPE_COLUMN_NAME = "TYPE";
+	
 
-	public String createTableSql = "CREATE TABLE "+TABLE_NAME+"("+ ID_COLUMN_NAME+"INTEGER PRIMARY KEY AUTOINCREMENT, "+CURRENCY_TYPE_COLUMN_NAME+" TEXT, "+BUY_RATE_COLUMN_NAME +"REAL, "+BUY_DATE_COLUMN_NAME+" TEXT)";
+	public String createTableSql = "CREATE TABLE "+TABLE_NAME+" ("+ ID_COLUMN_NAME+" INTEGER PRIMARY KEY AUTOINCREMENT, "+CURRENCY_TYPE_COLUMN_NAME+" TEXT, "+BUY_RATE_COLUMN_NAME +" REAL, "+BUY_DATE_COLUMN_NAME+" TEXT, "+TYPE_COLUMN_NAME+" INTEGER)";
 
+	public final static String deleteCurrencySql = "DELETE From " + TABLE_NAME + " where " + ID_COLUMN_NAME + " = ";
+	
+	
 	private static CurrencyDatabaseHelper mInstance = null;
 
 	/**

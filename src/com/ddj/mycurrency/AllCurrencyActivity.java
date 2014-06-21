@@ -14,8 +14,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ddj.commonkit.StringUtils;
 import com.ddj.mycurrency.model.Currency;
 import com.ddj.mycurrency.notify.INotify;
+import com.ddj.mycurrency.util.Constant;
 
 /**
  * @author dingdj Date:2014-6-17上午11:20:14
@@ -118,7 +120,12 @@ public class AllCurrencyActivity extends ListActivity implements INotify {
 				
 				bankBuyRate.setText(String.format(AllCurrencyActivity.this.getString(R.string.bank_buy_rate), currency.getBuyRate()));
 				bankSaleRaTe.setText(String.format(AllCurrencyActivity.this.getString(R.string.bank_sell_rate), currency.getSaleRate()));
-				currencyType.setText(String.format(AllCurrencyActivity.this.getString(R.string.currency_type), currency.getId()));
+				String id = currency.getId();
+				String toHumanreadCurrency = Constant.toHumanRead.get(id);
+				if(StringUtils.isNotEmpty(toHumanreadCurrency)){
+					id = toHumanreadCurrency;
+				}
+				currencyType.setText(String.format(AllCurrencyActivity.this.getString(R.string.currency_type), id));
 				updateTime.setText(String.format(AllCurrencyActivity.this.getString(R.string.update_time), currency.getUpdateTimeStr()));
 				
 				return convertView;
