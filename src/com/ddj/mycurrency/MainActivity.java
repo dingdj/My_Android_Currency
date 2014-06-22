@@ -13,8 +13,8 @@ public class MainActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 
 		TabHost mTabHost = getTabHost();
-		mTabHost.addTab(mTabHost.newTabSpec("allCurrency").setIndicator("所有汇率").setContent(new Intent(this, AllCurrencyActivity.class)));
 		mTabHost.addTab(mTabHost.newTabSpec("myCurrency").setIndicator("我的汇率").setContent(new Intent(this, FavoriteCurrencyActivity.class)));
+		mTabHost.addTab(mTabHost.newTabSpec("allCurrency").setIndicator("所有汇率").setContent(new Intent(this, AllCurrencyActivity.class)));
 		mTabHost.setCurrentTab(0);
 	}
 }
