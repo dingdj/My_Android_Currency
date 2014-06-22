@@ -5,7 +5,7 @@
  */
 package com.ddj.mycurrency.util;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * @author dingdj
@@ -19,8 +19,8 @@ public class Constant {
 	
 	public static final String NEW_CONTENT_NOTIFY = "NEW_CONTENT_NOTIFY";
 	
-	public static final HashMap<String, String> toHumanRead = new HashMap<String, String>();
-	public static final HashMap<String, String> toHumanReadReverse = new HashMap<String, String>();
+	public static final LinkedHashMap<String, String> toHumanRead = new LinkedHashMap<String, String>();
+	public static final LinkedHashMap<String, String> toHumanReadReverse = new LinkedHashMap<String, String>();
 	
 	static{
 		toHumanRead.put("AUD", "澳大利亚元");
