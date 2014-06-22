@@ -36,7 +36,6 @@ import android.widget.TextView;
 
 import com.ddj.commonkit.DateUtil;
 import com.ddj.commonkit.StringUtils;
-import com.ddj.mycurrency.AllCurrencyActivity.AllCurrencyAdapter;
 import com.ddj.mycurrency.database.DatabaseManager;
 import com.ddj.mycurrency.model.Currency;
 import com.ddj.mycurrency.model.FavoriteCurrency;
@@ -198,7 +197,7 @@ public class FavoriteCurrencyActivity extends ListActivity implements INotify{
 					Currency currency = application.currencyMap.get(currencyType);
 					
 					if(type == FavoriteCurrency.BUY_TYPE){
-						if(true || (Double.parseDouble(currency.getBuyRate()) - buyRate) > 0){
+						if((Double.parseDouble(currency.getBuyRate()) - buyRate) > 0){
 							Intent intent = new Intent(this, MainActivity.class);  
 			                PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
 							NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
@@ -216,7 +215,7 @@ public class FavoriteCurrencyActivity extends ListActivity implements INotify{
 							nm.notify(1, mBuilder.build());  
 						}
 					}else if(type == FavoriteCurrency.FAVORITE_TYPE){
-						if(true || Double.parseDouble(currency.getSaleRate()) - buyRate <= 0){
+						if(Double.parseDouble(currency.getSaleRate()) - buyRate <= 0){
 							Intent intent = new Intent(this, MainActivity.class);  
 			                PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
 							NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
