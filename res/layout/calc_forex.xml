@@ -1,0 +1,122 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="15dp" >
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保证金："
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/cur_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点差: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/diancha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+    </TableRow>
+    
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倍数: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/multiple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+    </TableRow>
+    
+     <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+    </TableRow>
+    
+     <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手数(1手100000): "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/shoushu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+    </TableRow>
+      <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+     </TableRow>
+
+      <TableRow
+          android:id="@+id/tableRow1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" >
+
+          <Button
+              android:id="@+id/calc"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="计算" />
+          
+      </TableRow>
+   
+</TableLayout>

@@ -5,5 +5,6 @@
     <string name="bank_sell_rate">卖出: %1$s</string>
     <string name="currency_type">币种: %1$s</string>
     <string name="update_time">更新时间：%1$s</string>
+    <string name="calc_dian_result">可承受差值点: %1$s</string>
 
 </resources>

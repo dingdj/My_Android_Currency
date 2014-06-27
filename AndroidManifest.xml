@@ -30,6 +30,10 @@
             android:name="com.ddj.mycurrency.FavoriteCurrencyActivity"
             android:label="@string/app_name" >
         </activity>
+         <activity
+            android:name="com.ddj.mycurrency.CalcCurrencyActivity"
+            android:label="@string/app_name" >
+        </activity>
 
         <service android:name="com.ddj.mycurrency.GetCurrencyService" >
         </service>
