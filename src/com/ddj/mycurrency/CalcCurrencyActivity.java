@@ -51,7 +51,7 @@ public class CalcCurrencyActivity extends Activity {
 				double d_shoushu = Double.parseDouble(shoushu.getText().toString());
 				
 				double d_result = d_rate - (d_diancha*d_shoushu) - ((1/d_multiple)*d_shoushu*100000*d_price);
-				int hudongResult = (int) (d_result/10.0);
+				int hudongResult = (int) (d_result/(10.0*d_shoushu));
 				
 				result.setText(String.format(CalcCurrencyActivity.this.getResources().getString(R.string.calc_dian_result),hudongResult+""));
 			}
