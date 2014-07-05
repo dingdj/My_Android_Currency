@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * @author dingdj
@@ -44,16 +45,21 @@ public class CalcCurrencyActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				double d_rate = Double.parseDouble(cur_rate.getText().toString());
-				double d_diancha = Double.parseDouble(diancha.getText().toString());
-				double d_multiple = Double.parseDouble(multiple.getText().toString());
-				double d_price = Double.parseDouble(price.getText().toString());
-				double d_shoushu = Double.parseDouble(shoushu.getText().toString());
-				
-				double d_result = d_rate - (d_diancha*d_shoushu) - ((1/d_multiple)*d_shoushu*100000*d_price);
-				int hudongResult = (int) (d_result/(10.0*d_shoushu));
-				
-				result.setText(String.format(CalcCurrencyActivity.this.getResources().getString(R.string.calc_dian_result),hudongResult+""));
+				try{
+					double d_rate = Double.parseDouble(cur_rate.getText().toString());
+					double d_diancha = Double.parseDouble(diancha.getText().toString());
+					double d_multiple = Double.parseDouble(multiple.getText().toString());
+					double d_price = Double.parseDouble(price.getText().toString());
+					double d_shoushu = Double.parseDouble(shoushu.getText().toString());
+					
+					double d_result = d_rate - (d_diancha*d_shoushu) - ((1/d_multiple)*d_shoushu*100000*d_price);
+					int hudongResult = (int) (d_result/(10.0*d_shoushu));
+					
+					result.setText(String.format(CalcCurrencyActivity.this.getResources().getString(R.string.calc_dian_result),hudongResult+""));
+				}catch(Exception e){
+					Toast.makeText(getApplicationContext(), "输入不正确，请重新输入", 1000).show();
+					e.printStackTrace();
+				}
 			}
 		});
 		

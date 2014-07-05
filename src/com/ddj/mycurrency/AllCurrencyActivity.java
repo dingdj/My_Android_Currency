@@ -6,18 +6,25 @@
 package com.ddj.mycurrency;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ddj.commonkit.StringUtils;
+import com.ddj.commonkit.android.image.ImageUtil;
 import com.ddj.mycurrency.model.Currency;
 import com.ddj.mycurrency.notify.INotify;
 import com.ddj.mycurrency.util.Constant;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 /**
  * @author dingdj Date:2014-6-17上午11:20:14
@@ -28,18 +35,44 @@ public class AllCurrencyActivity extends ListActivity implements INotify {
 	AllCurrencyAdapter adapter;
 
 	LayoutInflater inflater;
+	
+	private PullToRefreshListView mPullRefreshListView;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getListView().setAdapter(new AllCurrencyAdapter());
+		setContentView(R.layout.list_content_simple);
+		mPullRefreshListView = (PullToRefreshListView)findViewById(R.id.pull_refresh_list);
+		ListView actualListView = mPullRefreshListView.getRefreshableView();
+		adapter = new AllCurrencyAdapter();
+		actualListView.setAdapter(adapter);
 		inflater = getLayoutInflater();
+		
+		mPullRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				Toast.makeText(refreshView.getContext(), "正在刷新请稍候..", 2000).show();
+				Intent intent = new Intent();
+				intent.setClassName(AllCurrencyActivity.this, GetCurrencyService.class.getName());
+				startService(intent);
+				refreshView.postDelayed(new Runnable(){
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						mPullRefreshListView.onRefreshComplete();
+					}
+					
+				}, 5000);
+			}
+			
+		});
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		// 进行一次界面刷新
-		adapter = (AllCurrencyAdapter) getListView().getAdapter();
 		if(CurrencyApplication.application.currencys != null){
 			adapter.setCurrencys(CurrencyApplication.application.currencys);
 			adapter.notifyDataSetChanged();
@@ -121,6 +154,7 @@ public class AllCurrencyActivity extends ListActivity implements INotify {
 				bankBuyRate.setText(String.format(AllCurrencyActivity.this.getString(R.string.bank_buy_rate), currency.getBuyRate()));
 				bankSaleRaTe.setText(String.format(AllCurrencyActivity.this.getString(R.string.bank_sell_rate), currency.getSaleRate()));
 				String id = currency.getId();
+				iconView.setImageDrawable(ImageUtil.getDrawableByResourceName(getApplicationContext(), id.toLowerCase()));
 				String toHumanreadCurrency = Constant.toHumanRead.get(id);
 				if(StringUtils.isNotEmpty(toHumanreadCurrency)){
 					id = toHumanreadCurrency;

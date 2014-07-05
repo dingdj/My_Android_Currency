@@ -30,10 +30,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ddj.commonkit.DateUtil;
+import com.ddj.commonkit.FileUtil;
 import com.ddj.commonkit.StringUtils;
+import com.ddj.commonkit.android.image.ImageUtil;
+import com.ddj.mycurrency.database.CurrencyDatabaseHelper;
 import com.ddj.mycurrency.database.DatabaseManager;
 import com.ddj.mycurrency.model.FavoriteCurrency;
 import com.ddj.mycurrency.notify.INotify;
+import com.ddj.mycurrency.util.BackupUtil;
 import com.ddj.mycurrency.util.Constant;
 
 /**
@@ -47,7 +51,9 @@ public class FavoriteCurrencyActivity extends ListActivity implements INotify{
 
 	LayoutInflater inflater;
 	
-    public static final int ADD_ID = Menu.FIRST;// 添加命令对应ID值  
+    public static final int ADD_ID = Menu.FIRST;// 添加命令对应ID值
+    public static final int BACKUP_ID = Menu.FIRST+1;// 备份命令对应ID值
+    public static final int RESTORE_ID = Menu.FIRST+2;// 还原命令对应ID值
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,10 +148,12 @@ public class FavoriteCurrencyActivity extends ListActivity implements INotify{
 					bankSaleRaTe.setText("已买入");
 					bankSaleRaTe.setTextColor(Color.RED);
 				}else{
-					bankSaleRaTe.setText("未买入");
+					bankSaleRaTe.setText("通知");
+					bankSaleRaTe.setTextColor(Color.WHITE);
 				}
 				
 				String id = currency.getCurrencyType();
+				iconView.setImageDrawable(ImageUtil.getDrawableByResourceName(getApplicationContext(), id.toLowerCase()));
 				String toHumanreadCurrency = Constant.toHumanRead.get(id);
 				if(StringUtils.isNotEmpty(toHumanreadCurrency)){
 					id = toHumanreadCurrency;
@@ -187,6 +195,10 @@ public class FavoriteCurrencyActivity extends ListActivity implements INotify{
 		// TODO Auto-generated method stub
 		boolean rtn = super.onCreateOptionsMenu(menu);
         menu.add(Menu.NONE, ADD_ID, Menu.NONE, "增加汇率");
+        menu.add(Menu.NONE, BACKUP_ID, Menu.NONE, "备份");
+        if(BackupUtil.isExistBackUpFile()){
+        	menu.add(Menu.NONE,RESTORE_ID, Menu.NONE, "还原:"+BackupUtil.getBackUpFileDate());
+        }
 		return rtn;
 	}
 
@@ -286,6 +298,14 @@ public class FavoriteCurrencyActivity extends ListActivity implements INotify{
 			});
 			break;
 
+		case BACKUP_ID:
+			CurrencyDatabaseHelper.backupCurrencyTable(getApplicationContext());
+			break;
+			
+		case RESTORE_ID:
+			CurrencyDatabaseHelper.restoreAppTable(getApplicationContext());
+			refresh();
+			break;	
 		default:
 			break;
 		}

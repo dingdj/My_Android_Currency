@@ -15,19 +15,24 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.ddj.commonkit.StringUtils;
+import com.ddj.commonkit.android.system.SystemEnvUtil;
 import com.ddj.mycurrency.database.DatabaseManager;
 import com.ddj.mycurrency.model.Currency;
 import com.ddj.mycurrency.model.FavoriteCurrency;
@@ -206,10 +211,39 @@ public class GetCurrencyService extends Service {
 				handler.sendEmptyMessage(0);
 			}
 		};
-		handler.post(new Runnable() {
+		
+		//注册网络变化广播
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+		
+		this.registerReceiver(new BroadcastReceiver() {
+			
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				if(SystemEnvUtil.isNetworkAvailable(context)){
+					StringRequest stringRequest = new StringRequest(Constant.URL, listener, new Response.ErrorListener() {
+						@Override
+						public void onErrorResponse(VolleyError error) {
+							Log.e("TAG", error.getMessage(), error);
+						}
+					});
+					CurrencyApplication.application.requestQueue.add(stringRequest);
+				}
+			}
+		}, intentFilter);
 
+	}
+	
+	
+	
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		handler.post(new Runnable() {
+			
 			@Override
 			public void run() {
+				Log.e("GetCurrencyService", "onStartCommand");
 				StringRequest stringRequest = new StringRequest(Constant.URL, listener, new Response.ErrorListener() {
 					@Override
 					public void onErrorResponse(VolleyError error) {
@@ -220,8 +254,11 @@ public class GetCurrencyService extends Service {
 			}
 
 		});
-
+		return super.onStartCommand(intent, flags, startId);
 	}
+
+
+
 
 	@Override
 	public IBinder onBind(Intent intent) {

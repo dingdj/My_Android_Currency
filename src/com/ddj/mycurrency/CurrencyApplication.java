@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.ddj.mycurrency.model.Currency;
 import com.ddj.mycurrency.notify.INotify;
+import com.ddj.mycurrency.util.BackupUtil;
 
 /**
  * @author dingdj Date:2014-6-18下午5:07:02
@@ -42,6 +43,7 @@ public class CurrencyApplication extends Application {
 		Intent intent = new Intent();
 		intent.setClassName(this, GetCurrencyService.class.getName());
 		startService(intent);
+		BackupUtil.createBackupDir();
 	}
 
 	public void registerNotify(INotify notify) {

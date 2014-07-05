@@ -98,6 +98,12 @@
       <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
+        
+           <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可承受逆向点差: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/result"
@@ -106,17 +112,15 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
      </TableRow>
 
-      <TableRow
-          android:id="@+id/tableRow1"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" >
 
-          <Button
-              android:id="@+id/calc"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="计算" />
-          
-      </TableRow>
-   
+<TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+      <Button
+          android:paddingTop="5dip"
+          android:id="@+id/calc"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="计算" />
+   </TableRow>
 </TableLayout>

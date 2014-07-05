@@ -41,6 +41,8 @@ public class Constant {
 		toHumanRead.put("THB", "泰国铢");
 		toHumanRead.put("USD", "美元");
 		toHumanRead.put("RUB", "俄罗斯卢布");
+		toHumanRead.put("MYR", "马来西亚林吉特");
+		toHumanRead.put("ZAR", "南非兰特");
 		
 		for(String str : toHumanRead.keySet()){
 			toHumanReadReverse.put(toHumanRead.get(str), str);
